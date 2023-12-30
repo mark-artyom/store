@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/store/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/store/css/style.css">
+    <title>Store</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-xxl-5">
+                <div class="goods-box" id="goods">
+                    <div class="menu">
+                        <input type="text" name="" id="" placeholder="search" class="search">
+                        <button class="add btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">&#10010;</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="goods table mt-3" id="table1">
+                            <thead>
+                                <tr class="table-primary align-middle">
+                                    <th data-type="number">№</th>
+                                    <th data-type="string">Name</th>
+                                    <th data-type="number">Price, $</th>
+                                    <th data-type="number">Amount</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody class="list">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-xxl-7">
+                <div class="price-box">
+                    <div class="menu">
+                        <div class="price-title">
+                            Total:
+                            <span class="price-result">0$</span>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="price table mt-3" id="table2">
+                            <thead>
+                                <tr class="table-primary align-middle">
+                                    <th data-type="number">№</th>
+                                    <th data-type="string">Name</th>
+                                    <th data-type="number">Price/pcs, $</th>
+                                    <th data-type="number">Amount</th>
+                                    <th>Discount, %</th>
+                                    <th data-type="number">Price, $</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody class="cart">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Add product</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <label for="good-name" class="form-label">Name product</label>
+                <input type="text" name="" id="good-name" class="form-control mb-3" maxlength="40" >
+                <label for="good-price" class="form-label">Price</label>
+                <input type="text" name="" id="good-price" class="form-control mb-3" >
+                <label for="good-count" class="form-label">Amount</label>
+                <input type="text" name="" id="good-count" class="form-control mb-3" min="1" value="1" >
+                <button type="submit" class="btn btn-success">Save</button>
+            </div>
+            </div>
+        </div>
+        </div>
+    <script src="/store/js/bootstrap.bundle.min.js"></script>
+    <script src="/store/js/sweetalert2.all.min.js"></script>
+    <script src="/store/js/list.min.js"></script>
+    <script src="/store/js/main.js"></script>
+</body>
+</html>
