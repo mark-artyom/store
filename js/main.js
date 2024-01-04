@@ -9,7 +9,7 @@ let options = {
     valueNames: ['name', 'price']
 }
 
-let userList = 
+let userList 
 
 document.querySelector('button.add-new').addEventListener('click', function(e) {
     let name = document.getElementById('good-name').value
@@ -99,7 +99,7 @@ document.querySelector('.list').addEventListener('click', function(e) {
     }).then((result) => {
         if (result.isConfirmed) {
             let goods = JSON.parse(localStorage.getItem('goods'))
-            for (i = 0; i < goods.length; i++) {
+            for (let i = 0; i < goods.length; i++) {
                 if(goods[i][0] == e.target.dataset.delete) {
                     goods.splice(i, 1)
                     localStorage.setItem('goods', JSON.stringify(goods))
@@ -113,4 +113,34 @@ document.querySelector('.list').addEventListener('click', function(e) {
             )
         }
     })
+})
+
+document.querySelector('.list').addEventListener('click', function(e) {
+    if (!e.target.dataset.goods) {
+        return
+    }
+    let goods = JSON.parse(localStorage.getItem('goods'))
+    for (let i = 0; i < goods.length; i++) {
+        if(goods[i][3] > 0 && goods[i][0] == e.target.dataset.goods) {
+            goods[i].splice(3, 1, goods[i][3] - 1)
+            goods[i].splice(4, 1, goods[i][4] + 1)
+            localStorage.setItem('goods', JSON.stringify(goods))
+            updateGoods()
+        }
+    }
+})
+
+document.querySelector('.cart').addEventListener('click', function(e) {
+    if (!e.target.dataset.delete) {
+        return
+    }
+    let goods = JSON.parse(localStorage.getItem('goods'))
+    for (let i = 0; i < goods.length; i++) {
+        if(goods[i][4] > 0 && goods[i][0] == e.target.dataset.delete) {
+            goods[i].splice(3, 1, goods[i][3] + 1)
+            goods[i].splice(4, 1, goods[i][4] - 1)
+            localStorage.setItem('goods', JSON.stringify(goods))
+            updateGoods()
+        }
+    }
 })
