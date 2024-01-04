@@ -1,9 +1,10 @@
+/* Sorting the table on the left */
 table1.onclick = function(e) {
     if (e.target.tagName != 'TH') return
     let th = e.target
     sortTable(th.cellIndex, th.dataset.type, 'table1')
 }
-
+/* Sorting the table on the right */
 table2.onclick = function(e) {
     if (e.target.tagName != 'TH') return
     let th = e.target
@@ -31,19 +32,23 @@ function sortTable(colNum, type, id) {
         tBody.append(...rowsArray)
 }
 
-if (!localStorage.getItem('goods')) {
-    localStorage.setItem('goods', JSON.stringify([]))
-}
-let myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
-    keyboard: false
-})
-
+/* Product Search */
 let options = {
     valueNames: ['name', 'price']
 }
 
 let userList 
 
+/* Add a new product */
+// Modal window
+let myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
+    keyboard: false
+})
+// Add a counter for the number of products to the local storage
+if (!localStorage.getItem('goods')) {
+    localStorage.setItem('goods', JSON.stringify([]))
+}
+// Saving a new product
 document.querySelector('button.add-new').addEventListener('click', function(e) {
     let name = document.getElementById('good-name').value
     let price = document.getElementById('good-price').value
@@ -65,7 +70,7 @@ document.querySelector('button.add-new').addEventListener('click', function(e) {
         })
     }
 })
-
+// Updating displayed products
 updateGoods()
 
 function updateGoods() {
@@ -113,9 +118,11 @@ function updateGoods() {
         table1.hidden = true
         table2.hidden = true
     }
+    // // Enter the price in the total
     document.querySelector('.price-result').innerHTML = resultPrice + ' $'
 }
 
+/* Removal of individual products */
 document.querySelector('.list').addEventListener('click', function(e) {
     if (!e.target.dataset.delete) {
         return
@@ -148,6 +155,7 @@ document.querySelector('.list').addEventListener('click', function(e) {
     })
 })
 
+/* Add to Cart */
 document.querySelector('.list').addEventListener('click', function(e) {
     if (!e.target.dataset.goods) {
         return
@@ -163,6 +171,7 @@ document.querySelector('.list').addEventListener('click', function(e) {
     }
 })
 
+/* Removing one item from the shopping cart */
 document.querySelector('.cart').addEventListener('click', function(e) {
     if (!e.target.dataset.delete) {
         return
@@ -178,6 +187,7 @@ document.querySelector('.cart').addEventListener('click', function(e) {
     }
 })
 
+/* Changing the discount */
 document.querySelector('.cart').addEventListener('input', function(e) {
     if (!e.target.dataset.goodid) {
         return
@@ -185,10 +195,13 @@ document.querySelector('.cart').addEventListener('input', function(e) {
     let goods = JSON.parse(localStorage.getItem('goods'))
     for (let i = 0; i < goods.length; i++) {
         if(goods[i][0] == e.target.dataset.goodid) {
+            // Discount
             goods[i][5] = e.target.value
+            // Discounted price
             goods[i][6] = goods[i][4] * goods[i][2] - goods[i][4] * goods[i][2] * goods[i][5] * 0.01
             localStorage.setItem('goods', JSON.stringify(goods))
             updateGoods()
+            // Put the focus in the discount field and move the cursor to the end
             let input = document.querySelector(`[data-goodid="${goods[i][0]}"]`)
             input.focus()
             input.selectionStart = input.value.length
